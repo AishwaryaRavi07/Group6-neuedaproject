@@ -5,6 +5,7 @@ import Invoices from '../components/Invoices';
 import AddInvoice from "../components/AddInvoice";
 import { getAllInvoices, deleteInvoice } from "../services/api";
 
+
 const Component = styled(Box)`
     width: 80%;
     margin: 50px auto;
