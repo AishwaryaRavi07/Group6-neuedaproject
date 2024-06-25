@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../App.css';
+import '../styles/finance.css'
 
 const FinanceManager = () => {
   const [transactions, setTransactions] = useState([]);
@@ -56,18 +56,19 @@ const FinanceManager = () => {
   const toggleTheme = (selectedTheme) => {
     const root = document.documentElement;
     if (selectedTheme === 'light') {
-      root.style.setProperty('--first-color', '#F9F9F9');
-      root.style.setProperty('--second-color', '#14161F');
-      root.style.setProperty('--border-color', 'rgba(0, 0, 0, .2)');
+      root.style.setProperty('--first-color', '#F9F9F9'); // Light background
+      root.style.setProperty('--second-color', '#14161F'); // Dark text
+      root.style.setProperty('--border-color', 'rgba(0, 0, 0, .2)'); // Dark border
       setTheme('light');
-    } else {
-      root.style.setProperty('--first-color', '#14161F');
-      root.style.setProperty('--second-color', '#F9F9F9');
-      root.style.setProperty('--border-color', 'rgba(249, 249, 249, .2)');
+    } else if (selectedTheme === 'dark') {
+      // root.style.setProperty('--background-color', 'white');
+      root.style.setProperty('--first-color', '#14161F'); // Dark background
+      root.style.setProperty('--second-color', '#F9F9F9'); // Light text
+      root.style.setProperty('--border-color', 'rgba(249, 249, 249, .2)'); // Light border
       setTheme('dark');
     }
   };
-
+  
   const categoryIcon = (category) => {
     switch (category) {
       case 'Salary':
@@ -90,7 +91,7 @@ const FinanceManager = () => {
   };
 
   return (
-    <div style={{ background: "white", marginTop: "10vh" }}>
+    <div style={{marginTop: "10vh"}}>
       <nav className="navbar">
         <a href="/" className="navbar__logo">FINVOICE 360</a>
         <div className="navbar__toggle" id="mobile-menu">
@@ -156,7 +157,7 @@ const FinanceManager = () => {
             <p className="available-money">${availableMoney}</p>
           </div>
           <div className="controls">
-            <button className="add-transaction" onClick={() => handlePanelVisibility(true)}>
+            <button className="add-transaction" onClick={() => handlePanelVisibility()}>
               <i className="fas fa-plus"></i> Add transaction
             </button>
             <button className="delete-all" onClick={handleDeleteAll}>
@@ -173,38 +174,49 @@ const FinanceManager = () => {
         </section>
       </main>
 
-      {isPanelVisible && (
+      {isPanelVisible
+      && (
         <div className="add-transaction-panel">
-          <h2 className="title">Add new transaction</h2>
-          <label htmlFor="name">Name:</label>
-          <small>(give transaction name)</small>
-          <input type="text" id="name" value={formData.name} onChange={handleInputChange} />
+  <div className="form-container">
+    <h2 className="title">Add new transaction</h2>
+    
+    <div className="form-group">
+      <label htmlFor="name">Name:</label>
+      <input type="text" id="name" value={formData.name} onChange={handleInputChange} />
+      <small>(give transaction name)</small>
+    </div>
 
-          <label htmlFor="amount">Amount:</label>
-          <small>(give transaction amount, if it's spending you should put minus in the beginning)</small>
-          <input type="number" id="amount" value={formData.amount} onChange={handleInputChange} />
+    <div className="form-group">
+      <label htmlFor="amount">Amount:</label>
+      <input type="number" id="amount" value={formData.amount} onChange={handleInputChange} />
+      <small>(give transaction amount, if it's spending you should put minus in the beginning)</small>
+    </div>
 
-          <label htmlFor="category">Pick category:</label>
-          <select id="category" value={formData.category} onChange={handleInputChange}>
-            <option value="none" disabled>Select a category</option>
-            <option value="Salary">Salary</option>
-            <option value="Bonus">Bonus</option>
-            <option value="Investments">Investments</option>
-            <option value="Shopping">Shopping</option>
-            <option value="Food">Food</option>
-            <option value="Transportation">Transportation</option>
-            <option value="Entertainment">Entertainment</option>
-          </select>
+    <div className="form-group">
+      <label htmlFor="category">Pick category:</label>
+      <select id="category" value={formData.category} onChange={handleInputChange}>
+        <option value="none" disabled>Select a category</option>
+        <option value="Salary">Salary</option>
+        <option value="Bonus">Bonus</option>
+        <option value="Investments">Investments</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Food">Food</option>
+        <option value="Transportation">Transportation</option>
+        <option value="Entertainment">Entertainment</option>
+      </select>
+    </div>
 
-          <div className="panel-buttons">
-            <button className="save" onClick={handleAddTransaction}>
-              <i className="fas fa-save"></i> Save
-            </button>
-            <button className="cancel" onClick={() => handlePanelVisibility(false)}>
-              <i className="far fa-window-close"></i> Cancel
-            </button>
-          </div>
-        </div>
+    <div className="panel-buttons">
+      <button className="save" onClick={handleAddTransaction}>
+        <i className="fas fa-save"></i> Save
+      </button>
+      <button className="cancel" onClick={() => handlePanelVisibility(false)}>
+        <i className="far fa-window-close"></i> Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
       )}
     </div>
   );

@@ -6,8 +6,8 @@ import ContactForm from './pages/ContactForm';
 import FinanceManager from './pages/FinanceManager';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
-import InventoryHome from "./pages/InventoryHome"
-import "./App.css"
+
+// import "./App.css"
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
       <Route path="/finance" element={<FinanceManager/>}/>
       <Route path="/signup" element={<SignUp/>}/>
       <Route path="/login" element={<Login/>}/>
-      <Route path="/inventory" element={<InventoryHome/>}/>
+      
     </Routes>
     
   );
