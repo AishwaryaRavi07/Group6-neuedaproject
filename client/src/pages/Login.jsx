@@ -2,8 +2,11 @@ import React from 'react';
 
 import '../App.css'; // Assuming the styles from the links are in App.css
 
+
+
 const Login = () => (
-  <div className="container">
+  
+  <div className="container" style={{color:"white",background : "linear-gradient(135deg, rgba(0,36,96,1) 0%, rgba(9,80,190,1) 50%, rgba(0,212,255,1) 100%)"}}>
     <div className="title">Login</div>
     <form action="#">
       <div className="user__details">

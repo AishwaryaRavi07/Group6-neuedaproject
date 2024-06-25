@@ -28,7 +28,7 @@ const FinanceManager = () => {
       setTransactions([...transactions, newTransaction]);
       setAvailableMoney(prevMoney => prevMoney + newTransaction.amount);
       setFormData({ name: '', amount: '', category: 'none' });
-      setIsPanelVisible(false);
+      setIsPanelVisible(false); // Hide panel after adding transaction
     } else {
       alert('Please provide all transaction details.');
     }
@@ -48,8 +48,9 @@ const FinanceManager = () => {
     setAvailableMoney(0);
   };
 
-  const handlePanelVisibility = (visible) => {
-    setIsPanelVisible(visible);
+  const handlePanelVisibility = () => {
+    setIsPanelVisible(true); 
+    console.log("visibility set true")
   };
 
   const toggleTheme = (selectedTheme) => {

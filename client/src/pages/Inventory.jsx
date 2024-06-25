@@ -2,7 +2,7 @@ import React from 'react';
 
 const Inventory = () => {
   return (
-    <div>
+    <div style={{width:"218vh"}}>
       {/* Navbar Section */}
       <nav className="navbar">
         <a href="/" className="navbar__logo">FINVOICE 360</a>
@@ -67,7 +67,7 @@ const Inventory = () => {
 
       {/* Footer Section */}
       <div className="footer">
-        <div className="footer__wrapper">
+        <div className="footer__wrapper" style={{display:"flex"}}>
           <div className="footer__desc">
             <h1>Finvoice 360</h1>
             <p>Your Personal Manager</p>

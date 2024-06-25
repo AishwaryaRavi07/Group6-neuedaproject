@@ -26,7 +26,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container" style={{color:"white",background : "linear-gradient(135deg, rgba(0,36,96,1) 0%, rgba(9,80,190,1) 50%, rgba(0,212,255,1) 100%)"}}>
       <div className="title">Registration</div>
       <form onSubmit={handleSubmit}>
         <div className="user__details">
@@ -136,7 +136,7 @@ const SignUp = () => {
             </label>
           </div>
         </div>
-        <div className="button">
+        <div  style={{color:"black"}}>
           <input type="submit" value="Register" />
         </div>
       </form>
