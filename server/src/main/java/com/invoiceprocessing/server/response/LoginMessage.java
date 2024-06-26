@@ -1,6 +1,6 @@
 package com.invoiceprocessing.server.response;
 
-public class LoginMesage {
+public class LoginMessage {
     String message;
     Boolean status;
     public String getMessage() {
@@ -15,7 +15,7 @@ public class LoginMesage {
     public void setStatus(Boolean status) {
         this.status = status;
     }
-    public LoginMesage(String message, Boolean status) {
+    public LoginMessage(String message, Boolean status) {
         this.message = message;
         this.status = status;
     }
