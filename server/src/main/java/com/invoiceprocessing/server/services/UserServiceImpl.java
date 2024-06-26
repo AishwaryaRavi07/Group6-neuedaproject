@@ -7,6 +7,7 @@ import com.invoiceprocessing.server.model.User;
 import com.invoiceprocessing.server.response.LoginMessage;
 import com.invoiceprocessing.server.response.RegisterMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,18 @@ public class UserServiceImpl implements UserService{
     private UserDao userRepo;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    private AuthenticationManager authenticationManager;
+
+    public UserServiceImpl(
+            UserDao userRepo,
+            AuthenticationManager authenticationManager,
+            PasswordEncoder passwordEncoder
+    ) {
+        this.authenticationManager = authenticationManager;
+        this.userRepo = userRepo;
+        this.passwordEncoder = passwordEncoder;
+    }
+
     @Override
     public RegisterMessage addUser(UserDTO userDTO) {
         User user = new User(
@@ -79,5 +92,10 @@ public class UserServiceImpl implements UserService{
         }else {
             return new LoginMessage("User does not exist", false);
         }
+    }
+    @Override
+    public User getAuthenticatedUser(LoginDTO loginDTO){
+        User user = userRepo.findOneByUsername(loginDTO.getUsername());
+        return user;
     }
 }

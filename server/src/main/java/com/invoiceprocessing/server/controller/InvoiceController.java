@@ -14,12 +14,12 @@ public class InvoiceController {
     @Autowired
     InvoiceService invoiceService;
 
-    @PostMapping("/api/v1/invoice")
+    @PostMapping("/invoice")
     public Invoice addInvoice(@RequestBody Invoice invoice) {
         return this.invoiceService.addInvoice(invoice);
     }
 
-    @GetMapping("/api/v1/invoice")
+    @GetMapping("/invoice")
     public List<Invoice> getInvoices() {
         return this.invoiceService.getInvoices();
     }

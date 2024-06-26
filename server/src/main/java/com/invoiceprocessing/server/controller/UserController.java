@@ -2,8 +2,11 @@ package com.invoiceprocessing.server.controller;
 
 import com.invoiceprocessing.server.dto.LoginDTO;
 import com.invoiceprocessing.server.dto.UserDTO;
+import com.invoiceprocessing.server.model.User;
 import com.invoiceprocessing.server.response.LoginMessage;
+import com.invoiceprocessing.server.response.LoginTokenResponse;
 import com.invoiceprocessing.server.response.RegisterMessage;
+import com.invoiceprocessing.server.services.JWTService;
 import com.invoiceprocessing.server.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +14,16 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/v1/user")
+@RequestMapping("/auth")
 public class UserController {
     @Autowired
     private UserService userService;
+    private JWTService jwtService;
+
+    public UserController(JWTService jwtService, UserService authenticationService) {
+        this.jwtService = jwtService;
+        this.userService = authenticationService;
+    }
     @PostMapping(path = "/register")
     public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO)
     {
@@ -29,9 +38,15 @@ public class UserController {
     public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO)
     {
         LoginMessage loginResponse = userService.loginUser(loginDTO);
+
         if(loginResponse.getStatus()) {
-            return ResponseEntity.ok(loginResponse);
+            User authenticatedUser = userService.getAuthenticatedUser(loginDTO);
+            String jwtToken = jwtService.generateToken(authenticatedUser);
+            LoginTokenResponse loginTokenResponse = new LoginTokenResponse(
+                    "Login Successful", true, jwtToken, jwtService.getExpirationTime());
+            return ResponseEntity.ok(loginTokenResponse);
         } else{
+
             return ResponseEntity.badRequest().body(loginResponse);
         }
     }
