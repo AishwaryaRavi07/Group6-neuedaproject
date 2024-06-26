@@ -5,6 +5,7 @@ import Invoices from '../components/Invoices';
 import AddInvoice from "../components/AddInvoice";
 import { getAllInvoices, deleteInvoice } from "../services/api";
 
+
 const Component = styled(Box)`
     width: 80%;
     margin: 50px auto;
@@ -57,15 +58,16 @@ const Home = () => {
 
     return (
         <>
+        <div style={{width:"210vh"}}>
             <Header />
-            <Box style={{ margin: 20 }}>
-                <Typography variant="h4">Pending Invoices</Typography>
+            <Box style={{marginLeft:"30vh"}}>
+                <Typography variant="h4" style={{marginLeft:"55vh"}} >Pending Invoices</Typography>
                 {
                     !addInvoice && 
                         <Button 
                             variant="contained" 
                             onClick={() => toggleInvoice()}
-                            style={{ marginTop: 15 }}
+                            style={{ marginTop: 15 ,marginLeft : 20}}
                         >Add Invoice</Button>
                 }
                 {
@@ -78,6 +80,7 @@ const Home = () => {
                     />
                 </Box>
             </Box>
+            </div>
         </>
     )
 }
