@@ -1,4 +1,4 @@
-package com.invoiceprocessing.server;
+package com.invoiceprocessing.server.config;
 
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
