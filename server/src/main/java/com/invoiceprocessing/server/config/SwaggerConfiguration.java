@@ -17,4 +17,5 @@ public class SwaggerConfiguration {
                         .description("Welcome to the Invoice & Inventory Management API. Manage invoices, track inventory, and retrieving detailed reports. Simplify your business operations with our comprehensive API.")
                         .version("0.0.1"));
     }
+    //
 }
