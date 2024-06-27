@@ -4,8 +4,7 @@ import com.invoiceprocessing.server.dao.UserDao;
 import com.invoiceprocessing.server.dto.LoginDTO;
 import com.invoiceprocessing.server.dto.UserDTO;
 import com.invoiceprocessing.server.model.User;
-import com.invoiceprocessing.server.response.LoginMessage;
-import com.invoiceprocessing.server.response.RegisterMessage;
+import com.invoiceprocessing.server.response.GeneralResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,7 +34,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public RegisterMessage addUser(UserDTO userDTO) {
+    public GeneralResponse addUser(UserDTO userDTO) {
         User user = new User(
                 userDTO.getUserid(),
                 userDTO.getName(),
@@ -45,13 +44,13 @@ public class UserServiceImpl implements UserService{
                 userDTO.getGender()
         );
         if(user.getUsername().contains(" "))
-            return new RegisterMessage("Invalid username", false);
+            return new GeneralResponse("Invalid username", false);
         else {
             User user2 = userRepo.findOneByUsername(user.getUsername());
             if (user2!=null)
-                return new RegisterMessage("Username exists", false);
+                return new GeneralResponse("Username exists", false);
             else if (userDTO.getPassword().length()<6){
-                return new RegisterMessage("Password has to be at least 6 characters long", false);
+                return new GeneralResponse("Password has to be at least 6 characters long", false);
             }
             else {
                 // Regular Expression
@@ -61,19 +60,19 @@ public class UserServiceImpl implements UserService{
 
                 Matcher matcher = pattern.matcher(user.getEmail());
                 if(!matcher.matches()){
-                    return new RegisterMessage("Invalid email", false);
+                    return new GeneralResponse("Invalid email", false);
                 }
                 else if (user.getGender().equalsIgnoreCase("Male") || user.getGender().equalsIgnoreCase("Female") || user.getGender().equalsIgnoreCase("Prefer not to say")){
                     userRepo.save(user);
-                    return new RegisterMessage("Registration Successful", true);
+                    return new GeneralResponse("Registration Successful", true);
                 } else {
-                    return new RegisterMessage("Invalid gender", false);
+                    return new GeneralResponse("Invalid gender", false);
                 }
             }
         }
     }
     @Override
-    public LoginMessage loginUser(LoginDTO loginDTO) {
+    public GeneralResponse loginUser(LoginDTO loginDTO) {
         User user1 = userRepo.findOneByUsername(loginDTO.getUsername());
         if (user1 != null) {
             String password = loginDTO.getPassword();
@@ -82,15 +81,15 @@ public class UserServiceImpl implements UserService{
             if (isPwdRight) {
                 Optional<User> user = userRepo.findOneByUsernameAndPassword(loginDTO.getUsername(), encodedPassword);
                 if (user.isPresent()) {
-                    return new LoginMessage("Login Successful", true);
+                    return new GeneralResponse("Login Successful", true);
                 } else {
-                    return new LoginMessage("Login Failed", false);
+                    return new GeneralResponse("Login Failed", false);
                 }
             } else {
-                return new LoginMessage("Wrong Password", false);
+                return new GeneralResponse("Wrong Password", false);
             }
         }else {
-            return new LoginMessage("User does not exist", false);
+            return new GeneralResponse("User does not exist", false);
         }
     }
     @Override
