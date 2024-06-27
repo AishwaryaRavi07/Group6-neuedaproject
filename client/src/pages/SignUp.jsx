@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import "../styles/form.css"
+import axios from 'axios';
+import { Checkbox } from '@mui/material';
 
 const SignUp = () => {
+  const [addUser, setAddUser] = useState(" ");
   const [formData, setFormData] = useState({
-    fullName: '',
+    name: '',
     username: '',
     email: '',
     phoneNumber: '',
@@ -13,17 +16,29 @@ const SignUp = () => {
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value , type, checked} = e.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: type === 'checkbox' ? checked : value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
     console.log('Form submitted:', formData);
+    try{
+      const response = await axios.post("http://localhost:8080/auth/register",formData,{
+        headers : {
+          'Content-Type' : "application/json",
+          
+        },
+      });
+
+      console.log("Success", response.data)
+      
+    } catch(error){
+      console.log(error)
+    }
   };
 
   return (
@@ -35,7 +50,7 @@ const SignUp = () => {
             <span className="details">Full Name</span>
             <input
               type="text"
-              name="fullName"
+              name="name"
               placeholder="E.g: John Smith"
               value={formData.fullName}
               onChange={handleChange}
@@ -103,36 +118,35 @@ const SignUp = () => {
           <span className="gender__title">Gender</span>
           <div className="category">
             <label>
-              <input
+              <Checkbox
                 type="radio"
                 name="gender"
                 value="Male"
                 checked={formData.gender === 'Male'}
                 onChange={handleChange}
               />
-              <span className="dot one"></span>
+              
               <span>Male</span>
             </label>
             <label>
-              <input
+              <Checkbox
                 type="radio"
                 name="gender"
                 value="Female"
                 checked={formData.gender === 'Female'}
                 onChange={handleChange}
               />
-              <span className="dot two"></span>
               <span>Female</span>
             </label>
             <label>
-              <input
+              <Checkbox
                 type="radio"
                 name="gender"
                 value="Prefer not to say"
                 checked={formData.gender === 'Prefer not to say'}
                 onChange={handleChange}
               />
-              <span className="dot three"></span>
+            
               <span>Prefer not to say</span>
             </label>
           </div>

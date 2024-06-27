@@ -91,7 +91,7 @@ const FinanceManager = () => {
   };
 
   return (
-    <div style={{marginTop: "10vh"}}>
+    <div style={{marginTop: "10vh", background:"white"}}>
       <nav className="navbar">
         <a href="/" className="navbar__logo">FINVOICE 360</a>
         <div className="navbar__toggle" id="mobile-menu">
