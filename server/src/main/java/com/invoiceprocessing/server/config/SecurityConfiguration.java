@@ -34,7 +34,7 @@
          http.csrf()
                  .disable()
                  .authorizeHttpRequests()
-                 .requestMatchers("/auth/**")
+                 .requestMatchers("*")
                  .permitAll()
                  .anyRequest()
                  .authenticated()
@@ -50,21 +50,21 @@
 
      @Bean
      public WebSecurityCustomizer webSecurityCustomizer() {
-         return (web) -> web.ignoring().requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**");
+         return (web) -> web.ignoring().requestMatchers("/auth/**","/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**");
      }
 
-     @Bean
-     CorsConfigurationSource corsConfigurationSource() {
-         CorsConfiguration configuration = new CorsConfiguration();
+      @Bean
+      CorsConfigurationSource corsConfigurationSource() {
+          CorsConfiguration configuration = new CorsConfiguration();
 
-         configuration.setAllowedOrigins(List.of("http://localhost:8080"));
-         configuration.setAllowedMethods(List.of("GET","POST","DELETE","PUT"));
-         configuration.setAllowedHeaders(List.of("Authorization","Content-Type"));
+          configuration.setAllowedOrigins(List.of("*"));
+          configuration.setAllowedMethods(List.of("GET","POST","DELETE","PUT"));
+          configuration.setAllowedHeaders(List.of("*"));
 
-         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+          UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
-         source.registerCorsConfiguration("/**",configuration);
+          source.registerCorsConfiguration("/**",configuration);
 
-         return source;
-     }
+          return source;
+      }
  }
