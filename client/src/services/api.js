@@ -48,3 +48,12 @@ export const deleteInvoice = async (id) => {
         return error.response.data;
     }
 }
+
+// export const SaveUser = async (payload) => {
+//     try {
+//         return await axios.post(`${API_URL}/user`, payload);
+//     } catch (error) {
+//         console.log('Error: ', error.message);
+//         return error.response.data;
+//     }
+// }
