@@ -3,11 +3,10 @@ package com.invoiceprocessing.server.services;
 import com.invoiceprocessing.server.dto.LoginDTO;
 import com.invoiceprocessing.server.dto.UserDTO;
 import com.invoiceprocessing.server.model.User;
-import com.invoiceprocessing.server.response.LoginMessage;
-import com.invoiceprocessing.server.response.RegisterMessage;
+import com.invoiceprocessing.server.response.GeneralResponse;
 
 public interface UserService {
-    RegisterMessage addUser(UserDTO userDTO);
-    LoginMessage loginUser(LoginDTO loginDTO);
+    GeneralResponse addUser(UserDTO userDTO);
+    GeneralResponse loginUser(LoginDTO loginDTO);
     User getAuthenticatedUser(LoginDTO loginDTO);
 }
