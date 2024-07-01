@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import '../styles/finance.css'
+import '../styles/finance.css';
+import { saveTransaction } from '../services/api';
 
 const FinanceManager = () => {
   const [transactions, setTransactions] = useState([]);
@@ -17,7 +18,7 @@ const FinanceManager = () => {
     setFormData({ ...formData, [id]: value });
   };
 
-  const handleAddTransaction = () => {
+  const handleAddTransaction = async () => {
     if (formData.name && formData.amount && formData.category !== 'none') {
       const newTransaction = {
         id: Date.now(),
@@ -25,10 +26,20 @@ const FinanceManager = () => {
         amount: parseFloat(formData.amount),
         category: formData.category,
       };
-      setTransactions([...transactions, newTransaction]);
-      setAvailableMoney(prevMoney => prevMoney + newTransaction.amount);
-      setFormData({ name: '', amount: '', category: 'none' });
-      setIsPanelVisible(false); // Hide panel after adding transaction
+      try {
+        const response = await saveTransaction(newTransaction);
+        if (response) {
+            setTransactions([...transactions, newTransaction]);
+            setAvailableMoney(prevMoney => prevMoney + newTransaction.amount);
+            setFormData({ name: '', amount: '', category: 'none' });
+            setIsPanelVisible(false); // Hide panel after adding transaction
+        } else {
+            alert('Failed to save the transaction. Please try again.');
+        }
+    } catch (error) {
+        console.log('Error saving transaction:', error);
+        alert('Failed to save the transaction. Please try again.');
+    }  
     } else {
       alert('Please provide all transaction details.');
     }
@@ -50,7 +61,7 @@ const FinanceManager = () => {
 
   const handlePanelVisibility = () => {
     setIsPanelVisible(true); 
-    console.log("visibility set true")
+    
   };
 
   const toggleTheme = (selectedTheme) => {
