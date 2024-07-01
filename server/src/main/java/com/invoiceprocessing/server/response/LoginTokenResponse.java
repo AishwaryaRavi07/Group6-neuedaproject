@@ -4,7 +4,7 @@ public class LoginTokenResponse {
     String message;
     Boolean status;
     private String token;
-    private long expiresIn;
+    int userId;
 
     public String getToken() { return token; }
     public String getMessage() {
@@ -12,6 +12,9 @@ public class LoginTokenResponse {
     }
     public Boolean getStatus() {
         return status;
+    }
+    public int getUserId() {
+        return userId;
     }
 
     public void setMessage(String message) {
@@ -22,10 +25,15 @@ public class LoginTokenResponse {
     }
     public void setToken(String token) { this.token = token; }
 
-    public LoginTokenResponse(String message, Boolean status, String token, long expiresIn) {
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public LoginTokenResponse(String message, Boolean status, String token, int userId) {
         this.message = message;
         this.status = status;
         this.token = token;
-        this.expiresIn = expiresIn;
+        this.userId = userId;
     }
+
 }

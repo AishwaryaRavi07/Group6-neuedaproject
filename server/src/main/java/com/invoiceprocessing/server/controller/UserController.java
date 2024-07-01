@@ -42,7 +42,7 @@ public class UserController {
             User authenticatedUser = userService.getAuthenticatedUser(loginDTO);
             String jwtToken = jwtService.generateToken(authenticatedUser);
             LoginTokenResponse loginTokenResponse = new LoginTokenResponse(
-                    "Login Successful", true, jwtToken, jwtService.getExpirationTime());
+                    "Login Successful", true, jwtToken, authenticatedUser.getUserid());
             return ResponseEntity.ok(loginTokenResponse);
         } else{
 

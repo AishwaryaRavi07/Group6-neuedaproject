@@ -18,7 +18,6 @@ public class InvoiceController {
 
     @PostMapping("/invoice")
     public ResponseEntity<?> addInvoice(@RequestBody Invoice invoice) {
-        System.out.println("heheh: "+invoice);
         Invoice inv = this.invoiceService.addInvoice(invoice);
         if(inv!=null)
             return ResponseEntity.ok(inv);

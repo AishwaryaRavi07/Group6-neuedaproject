@@ -1,0 +1,37 @@
+package com.invoiceprocessing.server.controller;
+
+import com.invoiceprocessing.server.dto.UserIdDTO;
+import com.invoiceprocessing.server.model.Transaction;
+import com.invoiceprocessing.server.response.GeneralResponse;
+import com.invoiceprocessing.server.response.TransactionAnalyticsResponse;
+import com.invoiceprocessing.server.services.TransactionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@CrossOrigin(origins = "*")
+public class TransactionController {
+
+    @Autowired
+    TransactionService transactionService;
+
+    @PostMapping("/transaction")
+    public ResponseEntity<?> addTransaction(@RequestBody Transaction transaction) {
+        GeneralResponse res = this.transactionService.addTransaction(transaction);
+        if(res.getStatus())
+            return ResponseEntity.ok(res);
+        else
+            return ResponseEntity.badRequest().body(res);
+    }
+
+    @GetMapping("/transaction")
+    public TransactionAnalyticsResponse getTransactions(@RequestBody UserIdDTO userIdDTO) {
+        return this.transactionService.getTransactions(userIdDTO);
+    }
+
+    @DeleteMapping("/transaction")
+    public boolean deleteTransactions(@RequestBody UserIdDTO userIdDTO) {
+        return this.transactionService.deleteTransactions(userIdDTO);
+    }
+}
