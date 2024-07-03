@@ -36,7 +36,7 @@
                  .csrf()
                  .disable()
                  .authorizeHttpRequests()
-                 .requestMatchers("*")
+                 .requestMatchers("/auth/**")
                  .permitAll()
                  .anyRequest()
                  .authenticated()
@@ -53,7 +53,7 @@
 
      @Bean
      public WebSecurityCustomizer webSecurityCustomizer() {
-         return (web) -> web.ignoring().requestMatchers("/auth/**","/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**");
+         return (web) -> web.ignoring().requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**");
      }
 
       @Bean

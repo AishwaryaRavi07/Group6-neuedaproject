@@ -31,8 +31,6 @@ public class TransactionServiceImpl implements TransactionService{
     @Override
     public TransactionAnalyticsResponse getTransactions(UserIdDTO userIdDTO) {
         List<Transaction> transactions = transactionDao.findByUserId(Integer.parseInt(userIdDTO.getUserId()));
-
-        System.out.println("hiii"+ transactions.size());
         List<Transaction> income = new ArrayList<Transaction>();
         List<Transaction> spendings = new ArrayList<Transaction>();
         int availableMoney = 0;
@@ -56,13 +54,13 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     @Override
-    public boolean deleteTransactions(UserIdDTO userIdDTO) {
+    public GeneralResponse deleteTransactions(UserIdDTO userIdDTO) {
         try {
-            transactionDao.deleteAllByUserId(Integer.parseInt(userIdDTO.getUserId()));
-            return true;
+            transactionDao.deleteByUserId(Integer.parseInt(userIdDTO.getUserId()));
+            return new GeneralResponse("All transactions deleted successfully", true);
         } catch (Error e){
-            System.out.println("Error occurred while deleting: "+e.toString());
-            return false;
+            System.out.println("Error occurred while deleting transactions: "+e.toString());
+            return new GeneralResponse("Failed to delete transactions" , false);
         }
     }
 }

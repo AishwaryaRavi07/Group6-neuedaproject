@@ -1,5 +1,7 @@
 package com.invoiceprocessing.server.controller;
 
+import com.invoiceprocessing.server.dto.IdDTO;
+import com.invoiceprocessing.server.dto.UserIdDTO;
 import com.invoiceprocessing.server.model.Invoice;
 import com.invoiceprocessing.server.response.GeneralResponse;
 import com.invoiceprocessing.server.services.InvoiceService;
@@ -16,22 +18,26 @@ public class InvoiceController {
     @Autowired
     InvoiceService invoiceService;
 
-    @PostMapping("/invoice")
+    @PostMapping("/add-invoice")
     public ResponseEntity<?> addInvoice(@RequestBody Invoice invoice) {
         Invoice inv = this.invoiceService.addInvoice(invoice);
         if(inv!=null)
-            return ResponseEntity.ok(inv);
+            return ResponseEntity.ok(new GeneralResponse("Invoice added successfully", true));
         else
             return ResponseEntity.badRequest().body(new GeneralResponse("Failed to add invoice" , false));
     }
 
-    @GetMapping("/invoice")
-    public List<Invoice> getInvoices() {
-        return this.invoiceService.getInvoices();
+    @GetMapping("/get-invoices")
+    public List<Invoice> getInvoices(@RequestBody UserIdDTO userIdDTO) {
+        return this.invoiceService.getInvoices(Integer.parseInt(userIdDTO.getUserId()));
     }
 
-    @DeleteMapping("/invoice/{invoiceId}")
-    public Invoice deleteInvoice(@PathVariable String invoiceId) {
-        return this.invoiceService.deleteInvoice(Long.parseLong(invoiceId));
+    @DeleteMapping("/delete-invoice")
+    public ResponseEntity<?> deleteInvoice(@RequestBody IdDTO idDTO) {
+        boolean res = this.invoiceService.deleteInvoice(idDTO.getId());
+        if(res)
+            return ResponseEntity.ok(new GeneralResponse("Invoice deleted successfully", true));
+        else
+            return ResponseEntity.badRequest().body(new GeneralResponse("Failed to delete invoice" , false));
     }
 }

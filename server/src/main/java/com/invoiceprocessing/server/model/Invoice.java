@@ -10,6 +10,7 @@ public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    private int userId;
     private String vendor;
     private String product;
     private int amount;
@@ -18,8 +19,9 @@ public class Invoice {
 
     public Invoice() {}
 
-    public Invoice(long id, String vendor, String product, int amount, String date, String action) {
+    public Invoice(long id, int userId, String vendor, String product, int amount, String date, String action) {
         this.id = id;
+        this.userId = userId;
         this.vendor = vendor;
         this.product = product;
         this.amount = amount;
@@ -34,6 +36,10 @@ public class Invoice {
     public void setId(long id) {
         this.id = id;
     }
+
+    public int getUserId() { return userId; }
+
+    public void setUserId(int userId) { this.userId = userId; }
 
     public String getVendor() {
         return vendor;

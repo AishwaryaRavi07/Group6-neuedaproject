@@ -11,5 +11,5 @@ public interface TransactionService {
 
     public TransactionAnalyticsResponse getTransactions(UserIdDTO userIdDTO);
 
-    public boolean deleteTransactions(UserIdDTO userIdDTO);
+    public GeneralResponse deleteTransactions(UserIdDTO userIdDTO);
 }

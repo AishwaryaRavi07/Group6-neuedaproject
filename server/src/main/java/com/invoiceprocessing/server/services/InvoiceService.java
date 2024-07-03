@@ -8,7 +8,7 @@ public interface InvoiceService {
 
     public Invoice addInvoice(Invoice invoice);
 
-    public List<Invoice> getInvoices();
+    public List<Invoice> getInvoices(int userId);
 
-    public Invoice deleteInvoice(long id);
+    public boolean deleteInvoice(long id);
 }

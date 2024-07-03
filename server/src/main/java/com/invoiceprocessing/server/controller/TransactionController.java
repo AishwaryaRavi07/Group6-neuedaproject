@@ -16,7 +16,7 @@ public class TransactionController {
     @Autowired
     TransactionService transactionService;
 
-    @PostMapping("/transaction")
+    @PostMapping("/add-transaction")
     public ResponseEntity<?> addTransaction(@RequestBody Transaction transaction) {
         GeneralResponse res = this.transactionService.addTransaction(transaction);
         if(res.getStatus())
@@ -25,13 +25,17 @@ public class TransactionController {
             return ResponseEntity.badRequest().body(res);
     }
 
-    @GetMapping("/transaction")
+    @GetMapping("/get-transactions")
     public TransactionAnalyticsResponse getTransactions(@RequestBody UserIdDTO userIdDTO) {
         return this.transactionService.getTransactions(userIdDTO);
     }
 
-    @DeleteMapping("/transaction")
-    public boolean deleteTransactions(@RequestBody UserIdDTO userIdDTO) {
-        return this.transactionService.deleteTransactions(userIdDTO);
+    @DeleteMapping("/delete-transactions")
+    public ResponseEntity<?> deleteTransactions(@RequestBody UserIdDTO userIdDTO) {
+        GeneralResponse res = this.transactionService.deleteTransactions(userIdDTO);
+        if(res.getStatus())
+            return ResponseEntity.ok(res);
+        else
+            return ResponseEntity.badRequest().body(res);
     }
 }
