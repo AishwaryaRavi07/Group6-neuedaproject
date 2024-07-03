@@ -12,9 +12,9 @@ public class SwaggerConfiguration {
     public OpenAPI apiDocConfig() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Invoice Management API")
-                        .description("Welcome to the Invoice Management API. Simplify your business operations with our comprehensive API.")
-                        .version("0.0.1"));
+                        .title("Invoice & Finance Management API")
+                        .description("Welcome to the Invoice & Finance Management API. Simplify your business operations with our comprehensive API.")
+                        .version("1.0.0"));
     }
     //
 }
