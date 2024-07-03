@@ -29,7 +29,8 @@
          this.jwtAuthenticationFilter = jwtAuthenticationFilter;
      }
 
-     @Bean
+    @SuppressWarnings("removal")
+    @Bean
      public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
          http.cors()
                  .and()
