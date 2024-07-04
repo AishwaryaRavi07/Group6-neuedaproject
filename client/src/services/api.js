@@ -4,11 +4,14 @@ const API_URL = 'http://localhost:8080';
 
 export const getAllInvoices = async () => {
     try {
-        return await axios.get(`${API_URL}/invoice`,{
-            // headers : {
-            //     'Authorization' : `Bearer "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBaXNoUmF2aTA3IiwiaWF0IjoxNzE5ODMwNDc3LCJleHAiOjE3MTk5MTY4Nzd9.cAOGUI3iu4OWpSpb5YcJc8WnbqZRiLKJ_a-F53ptt_c"`,
-            //     'Content-Type' :'application/json',         
-            // },
+        return await axios.get(`${API_URL}/get-invoices`,{
+            headers : {
+                'Authorization' : `Bearer "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBaXNoUmF2aTA3IiwiaWF0IjoxNzIwMDA2NjMzLCJleHAiOjE3MjAwOTMwMzN9.nydzRlVtLLDPWgo9K7MYk87vGUZoXKSja0Ji49ywDFM"`,
+                'Content-Type' :'application/json',         
+            },
+            body : {
+                "userId" : 0
+            }
         });
     } catch (error) {
         console.log('Error: ', error.message);

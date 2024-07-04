@@ -23,7 +23,8 @@ const Login = () => {
     try{
       const response = await axios.post("http://localhost:8080/auth/login",formData,{
         headers : {
-          'Content-Type' : "application/json",        
+          'Content-Type' : "application/json", 
+          
         },
       });
   
