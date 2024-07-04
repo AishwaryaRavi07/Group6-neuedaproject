@@ -27,8 +27,18 @@ public class UserController {
     public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO)
     {
         GeneralResponse registerMessage = userService.addUser(userDTO);
+        
         if(registerMessage.getStatus()) {
-            return ResponseEntity.ok(registerMessage);
+            // logging in user 
+            
+            User authenticatedUser = userService.getAuthenticatedUser(new LoginDTO(
+                userDTO.getUsername(),
+                userDTO.getPassword()
+            ));
+            String jwtToken = jwtService.generateToken(authenticatedUser);
+            LoginTokenResponse regTokenResponse = new LoginTokenResponse(
+                    "Registration Successful", true, jwtToken, authenticatedUser.getUserid());
+            return ResponseEntity.ok(regTokenResponse);
         } else{
             return ResponseEntity.badRequest().body(registerMessage);
         }
