@@ -15,7 +15,7 @@ function App() {
       <Route path='/' element={<Home/>}/>
       <Route path='/analytics' element={<PieChart/>}/>
       <Route path="/contact" element={<ContactForm/>}/>
-      <Route path="/finance" element={<FinanceManager/>}/>
+      <Route path="/transaction" element={<FinanceManager/>}/>
       <Route path="/signup" element={<SignUp/>}/>
       <Route path="/login" element={<Login/>}/>
       

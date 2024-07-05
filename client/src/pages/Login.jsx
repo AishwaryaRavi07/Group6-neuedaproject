@@ -27,8 +27,13 @@ const Login = () => {
           
         },
       });
-  
+      
       console.log("Success", response.data)
+
+      localStorage.setItem("authToken", response.data.token);
+
+      let mytoken = localStorage.getItem("authToken");
+      console.log(mytoken)
       
     } catch(error){
       console.log(error)

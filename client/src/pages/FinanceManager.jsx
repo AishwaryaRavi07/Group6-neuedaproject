@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import '../styles/finance.css';
-import { saveTransaction } from '../services/api';
+import { getTransaction, saveTransaction } from '../services/api';
 
 const FinanceManager = () => {
   const [transactions, setTransactions] = useState([]);
@@ -8,10 +8,30 @@ const FinanceManager = () => {
     name: '',
     amount: '',
     category: 'none',
+    userId : 2
   });
   const [availableMoney, setAvailableMoney] = useState(0);
   const [isPanelVisible, setIsPanelVisible] = useState(false);
   const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getTransaction();
+        if (response && response.data) {
+          setTransactions(response.data);
+          const totalMoney = response.data.reduce(
+            (acc, transaction) => acc + transaction.amount,
+            0
+          );
+          setAvailableMoney(totalMoney);
+        }
+      } catch (error) {
+        console.error('Error fetching transactions:', error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -19,12 +39,13 @@ const FinanceManager = () => {
   };
 
   const handleAddTransaction = async () => {
-    if (formData.name && formData.amount && formData.category !== 'none') {
+    console.log(formData)
+    if (formData.name && formData.amount && formData.category !== 'none' ) {
       const newTransaction = {
-        id: Date.now(),
         name: formData.name,
         amount: parseFloat(formData.amount),
         category: formData.category,
+        userId : 2
       };
       try {
         const response = await saveTransaction(newTransaction);
@@ -32,7 +53,7 @@ const FinanceManager = () => {
             setTransactions([...transactions, newTransaction]);
             setAvailableMoney(prevMoney => prevMoney + newTransaction.amount);
             setFormData({ name: '', amount: '', category: 'none' });
-            setIsPanelVisible(false); // Hide panel after adding transaction
+            setIsPanelVisible(false); 
         } else {
             alert('Failed to save the transaction. Please try again.');
         }
