@@ -46,7 +46,7 @@ const Home = () => {
     }, [addInvoice]);
 
     const removeInvoice = async (id) => {
-        await deleteInvoice(id);
+        await deleteInvoice({"id":id});
 
         const updatedInvoices = invoices.filter(invoice => invoice.id != id);
         setInvoices(updatedInvoices);

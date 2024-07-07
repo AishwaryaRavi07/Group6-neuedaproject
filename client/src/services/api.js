@@ -37,15 +37,15 @@ export const saveInvoice = async (payload) => {
     }
 }
 
-export const deleteInvoice = async (id) => {
+export const deleteInvoice = async (payload) => {
     try {
         const token = getToken();
         return await axios.delete(`${API_URL}/delete-invoice`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
-                
-            }
+            },
+            data: payload
         });
     } catch (error) {
         console.log('Error: ', error.message);
