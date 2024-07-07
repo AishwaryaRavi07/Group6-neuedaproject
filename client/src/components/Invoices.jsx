@@ -4,10 +4,11 @@ import { TableCell, Table, TableHead, TableRow, TableBody, Button, Typography, s
 const StyledTable = styled(Table)({
     margin: 20,
     marginTop: 40,
+   
     width: '80%',
     '& > thead > tr > th': {
-        background: '#000',
-        color: '#FFFFFF',
+        background: '#d2cbdac6',
+        color: '#000',
         fontSize: 18
     },
     '& > tbody > tr > td': {

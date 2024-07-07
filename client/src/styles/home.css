@@ -1,0 +1,26 @@
+.header-container {
+  align-self: center;
+  align-content: center;
+  width: 50vw;
+  margin-left: 25vw;
+  border-radius: 10px;
+}
+
+.home-page-header {
+  font-size: 55px;
+
+  font-weight: 700;
+  color: rgba(125, 18, 142, 0.922);
+  background-color: #d2cbdac6;
+  border: 4px dashed rgba(147, 11, 157, 0.774);
+  height: 30vh;
+  padding-top: 20px;
+
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.small-heading {
+  color: #3db1ff;
+}

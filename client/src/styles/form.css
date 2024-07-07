@@ -20,7 +20,7 @@ body {
   height: 100vh;
   justify-content: center; /*center vertically */
   align-items: center; /* center horizontally */
-  background: linear-gradient(135deg, var(--main-blue), var(--main-purple));
+  background: linear-gradient(135deg, var(--main-grey),var(--main-purple),var(--main-blue), var(--main-purple),var(--main-grey));
   padding: 10px;
 }
 /* container and form */

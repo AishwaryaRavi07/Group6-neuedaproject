@@ -61,7 +61,7 @@ const Home = () => {
         <div style={{width:"210vh"}}>
             <Header />
             <Box style={{marginLeft:"30vh"}}>
-                <Typography variant="h4" style={{marginLeft:"55vh"}} >Pending Invoices</Typography>
+                <Typography variant="h4" style={{marginLeft:"55vh" ,marginTop:"15vh"}} >Pending Invoices</Typography>
                 {
                     !addInvoice && 
                         <Button 
