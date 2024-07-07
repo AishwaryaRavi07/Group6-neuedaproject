@@ -6,13 +6,14 @@ import ContactForm from './pages/ContactForm';
 import FinanceManager from './pages/FinanceManager';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
-
-// import "./App.css"
+import MainPage from './pages/MainPage';
 
 function App() {
   return (
     <Routes>
-      <Route path='/home' element={<Home/>}/>
+
+      <Route path='/' element={<MainPage/>}/>
+      <Route path='/invoice' element={<Home/>}/>
       <Route path='/analytics' element={<PieChart/>}/>
       <Route path="/contact" element={<ContactForm/>}/>
       <Route path="/transaction" element={<FinanceManager/>}/>
