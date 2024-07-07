@@ -66,6 +66,7 @@ body {
 .title-color {
   color: var(--second-color);
 }
+
 @keyframes slideInLeft {
   0% {
     transform: translateX(-100%);
@@ -94,6 +95,5 @@ body {
 
 .piechart-container {
   width: 60%;
-
   animation: slideInRight 0.9s forwards;
 }

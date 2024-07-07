@@ -9,7 +9,7 @@ public interface TransactionService {
 
     public GeneralResponse addTransaction(Transaction transaction);
 
-    public TransactionAnalyticsResponse getTransactions(UserIdDTO userIdDTO);
+    public TransactionAnalyticsResponse getTransactions(String userId);
 
     public GeneralResponse deleteTransactions(UserIdDTO userIdDTO);
 }

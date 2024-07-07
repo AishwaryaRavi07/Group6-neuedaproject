@@ -19,8 +19,14 @@ const FinanceManager = () => {
       try {
         const response = await getTransaction();
         if (response && response.data) {
+          const fetchedTransactions = response.data;
+
+          // Categorize transactions into income and spending
+          const incomeTransactions = fetchedTransactions.filter(tx => tx.amount > 0);
+          const spendingTransactions = fetchedTransactions.filter(tx => tx.amount < 0);
+
           setTransactions(response.data);
-          const totalMoney = response.data.reduce(
+          const totalMoney = fetchedTransactions.reduce(
             (acc, transaction) => acc + transaction.amount,
             0
           );

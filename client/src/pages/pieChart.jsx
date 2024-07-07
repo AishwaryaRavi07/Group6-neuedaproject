@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Chart from "chart.js/auto";
 import "../styles/PieChart.css";
+
 const PieChart = () => {
   const [xValues, setXValues] = useState([]);
   const [yValues, setYValues] = useState([]);
@@ -17,6 +18,7 @@ const PieChart = () => {
         "Balance Left",
       ];
       const productPrices = [10000, 15000, 40000, 20000, 30000, 50000];
+      setXValues(productNames); // Add this line
       setYValues(productPrices);
       console.log("Data fetched", { productNames, productPrices });
     };
