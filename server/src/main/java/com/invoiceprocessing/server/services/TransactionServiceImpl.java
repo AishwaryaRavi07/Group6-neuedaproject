@@ -29,8 +29,8 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     @Override
-    public TransactionAnalyticsResponse getTransactions(UserIdDTO userIdDTO) {
-        List<Transaction> transactions = transactionDao.findByUserId(Integer.parseInt(userIdDTO.getUserId()));
+    public TransactionAnalyticsResponse getTransactions(String userId) {
+        List<Transaction> transactions = transactionDao.findByUserId(Integer.parseInt(userId));
         List<Transaction> income = new ArrayList<Transaction>();
         List<Transaction> spendings = new ArrayList<Transaction>();
         int availableMoney = 0;

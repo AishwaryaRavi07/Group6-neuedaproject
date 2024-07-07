@@ -25,9 +25,9 @@ public class TransactionController {
             return ResponseEntity.badRequest().body(res);
     }
 
-    @GetMapping("/get-transactions")
-    public TransactionAnalyticsResponse getTransactions(@RequestBody UserIdDTO userIdDTO) {
-        return this.transactionService.getTransactions(userIdDTO);
+    @GetMapping("/get-transactions/{userId}")
+    public TransactionAnalyticsResponse getTransactions(@PathVariable String userId) {
+        return this.transactionService.getTransactions(userId);
     }
 
     @DeleteMapping("/delete-transactions")
