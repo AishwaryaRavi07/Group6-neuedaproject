@@ -12,7 +12,7 @@ import Login from './pages/Login';
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<Home/>}/>
+      <Route path='/home' element={<Home/>}/>
       <Route path='/analytics' element={<PieChart/>}/>
       <Route path="/contact" element={<ContactForm/>}/>
       <Route path="/transaction" element={<FinanceManager/>}/>
