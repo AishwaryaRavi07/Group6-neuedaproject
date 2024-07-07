@@ -8,15 +8,15 @@ export const getAllInvoices = async (payload) => {
     try {
         const token = getToken();
         console.log(token)
-        return await axios.get(`${API_URL}/get-invoices`, {
+        return await axios.get(`${API_URL}/get-invoices`,{
+            userId: "2"
+          }
+         ,{
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'
             },
-            params: {
-                userId: "2"
-              }
             
         });
     } catch (error) {
@@ -69,7 +69,7 @@ export const getTransaction = async () => {
                 'Access-Control-Allow-Origin': '*'
             },
             body: {
-                userId: "2"
+                userId: "0"
               }
         });
     } catch (error) {
